@@ -25,6 +25,7 @@ export default function RootLayout({
 }>) {
   const showBubble = process.env.NEXT_PUBLIC_SHOW_CTA_BUBBLE !== "false";
   const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
+  const googleTagPath = process.env.NEXT_PUBLIC_GOOGLE_TAG_PATH || "/oojo";
   const isProduction = process.env.NODE_ENV === "production";
   const shouldLoadTag = Boolean(googleAdsId && (isProduction || process.env.NEXT_PUBLIC_FORCE_TAG === "true"));
 
@@ -33,8 +34,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {shouldLoadTag && (
           <>
+            {/* Google Tag Gateway (served first-party via Cloudflare /oojo) */}
             <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+              src={googleTagPath}
               strategy="afterInteractive"
             />
             <Script id="google-ads-gtag" strategy="afterInteractive">
