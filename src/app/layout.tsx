@@ -25,7 +25,8 @@ export default function RootLayout({
 }>) {
   const showBubble = process.env.NEXT_PUBLIC_SHOW_CTA_BUBBLE !== "false";
   const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
-  const googleTagPath = process.env.NEXT_PUBLIC_GOOGLE_TAG_PATH || "/oojo";
+  const rawTagPath = process.env.NEXT_PUBLIC_GOOGLE_TAG_PATH || "/oojo/";
+  const googleTagPath = rawTagPath.endsWith("/") ? rawTagPath : `${rawTagPath}/`;
   const isProduction = process.env.NODE_ENV === "production";
   const shouldLoadTag = Boolean(googleAdsId && (isProduction || process.env.NEXT_PUBLIC_FORCE_TAG === "true"));
 

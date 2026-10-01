@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: '/locksmith-livingston',
         permanent: true,
       },
+      {
+        source: '/oojo',
+        destination: '/oojo/',
+        permanent: true,
+      },
     ];
   },
 };
